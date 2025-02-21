@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-   // id("com.google.devtools.ksp")
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
 }
@@ -36,13 +36,34 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    dataBinding{
+        enable = true
+    }
 }
 
 dependencies {
 
+    //Room
+    val room_version = "2.6.1"
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
+
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
+
+    //RetroFit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    //-->
+    val lifecycle_version = "2.8.6"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
+    //<--
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

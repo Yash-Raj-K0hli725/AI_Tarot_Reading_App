@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AI Tarot Reading App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splashText1">Where the Card Speaks</string>
+    <string name="splashText2">Your Destiny</string>
+    <string name="splashText3">Awaits</string>
+    <string name="dots">.</string>
 </resources>
