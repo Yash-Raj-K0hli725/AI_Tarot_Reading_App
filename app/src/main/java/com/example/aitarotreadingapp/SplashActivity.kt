@@ -52,7 +52,8 @@ class SplashActivity : AppCompatActivity() {
 
     fun checkDataBase() {
         CoroutineScope(Dispatchers.IO).launch {
-            if (dataBase.getDB().Count() == 0) {
+            val entryCount = dataBase.getDB().Count()
+            if (entryCount == 0 || entryCount < 78) {
                 importData()
             }
             else{
@@ -71,9 +72,6 @@ class SplashActivity : AppCompatActivity() {
             override fun onResponse(p0: Call<Details>, response: Response<Details>) {
                 Log.d("yash", "connection to tarrot Api : ${response.isSuccessful}")
                 val cardDetails = response.body()!!.cards
-                cardDetails.forEach {
-                    Log.d("cards","${it}")
-                }
                 CoroutineScope(Dispatchers.Main).launch {
                     val job  = CoroutineScope(Dispatchers.IO).launch{
                         saveToDatabase(cardDetails)

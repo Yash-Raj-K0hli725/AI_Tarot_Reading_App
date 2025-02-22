@@ -11,8 +11,11 @@ interface Dao {
     @Insert
     suspend fun InsertAllTarotDetails(ApiResponse: List<CardsData>)
 
-    @Query("SELECT * FROM CARDSDATA WHERE suit = :suit ")
-    suspend fun Read(suit:String):List<CardsData>
+    @Query("SELECT * FROM CARDSDATA WHERE suit = :nameShort ")
+    suspend fun readWith(nameShort: String):List<CardsData>
+
+    @Query("SELECT * FROM CARDSDATA")
+    suspend fun readAll():List<CardsData>
 
     @Query("SELECT COUNT(*) FROM cardsdata")
     suspend fun Count():Int
