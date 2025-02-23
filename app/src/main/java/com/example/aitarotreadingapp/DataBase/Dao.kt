@@ -14,6 +14,9 @@ interface Dao {
     @Query("SELECT * FROM CARDSDATA WHERE suit = :nameShort ")
     suspend fun readWith(nameShort: String):List<CardsData>
 
+    @Query("DELETE FROM CARDSDATA")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM CARDSDATA")
     suspend fun readAll():List<CardsData>
 

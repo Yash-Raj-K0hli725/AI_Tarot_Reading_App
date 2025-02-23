@@ -3,11 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navo"
-    app:startDestination="@id/home2">
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/home"
         android:name="com.example.aitarotreadingapp.fragments.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_popUp"
+            app:destination="@id/popUp" />
+        <action
+            android:id="@+id/action_home_to_history"
+            app:destination="@id/history" />
+    </fragment>
+    <dialog
+        android:id="@+id/popUp"
+        android:name="com.example.aitarotreadingapp.fragments.popUp"
+        android:label="popUp" >
+        <argument
+            android:name="Card"
+            app:argType="com.example.aitarotreadingapp.DataBase.CardsData" />
+    </dialog>
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.aitarotreadingapp.fragments.History"
+        android:label="History"
+        tools:layout="@layout/fragment_history"
+        />
 </navigation>

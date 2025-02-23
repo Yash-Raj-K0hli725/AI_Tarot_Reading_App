@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,11 +11,84 @@
 
         <fragment
             android:id="@+id/hostHolder"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:navGraph="@navigation/navo"
-            />
+            android:visibility="gone"
+            app:navGraph="@navigation/navo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/crystalBall"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-20dp"
+            android:elevation="5dp"
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/crystalball"
+            android:translationX="-3dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.bottomappbar.BottomAppBar
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                app:fabAlignmentMode="center"
+                app:fabAnchorMode="cradle"
+                app:fabCradleRoundedCornerRadius="60dp"
+                app:removeEmbeddedFabElevation="true" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:alpha="0"
+                app:layout_anchor="@id/bottom"
+                app:shapeAppearance="@style/Widget.Design.FloatingActionButton" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@android:color/transparent"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_menu" />
+
+            <TextView
+                android:id="@+id/clickText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/alata"
+                android:paddingTop="60dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:background="@color/white"
+                android:elevation="4dp"
+                android:layout_gravity="center"
+                android:text="@string/click_to_reveal_your_future" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

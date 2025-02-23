@@ -5,93 +5,88 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/homeMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.Home">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchLayer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/crystalGuide"
             app:layout_constraintEnd_toStartOf="@id/vtextfieldHelperright"
-            app:layout_constraintStart_toEndOf="@id/vtextfieldHelperleft">
+            app:layout_constraintStart_toEndOf="@id/vtextfieldHelperleft"
+            app:layout_constraintTop_toBottomOf="@id/queryGuide">
 
-            <EditText
-                android:id="@+id/query"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="60dp"
-                android:background="@android:color/transparent"
-                android:paddingStart="17dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnSearch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                tools:ignore="RtlSymmetry" />
+                app:layout_constraintVertical_bias="0.5">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/query_outline" />
+
+                <EditText
+                    android:id="@+id/query"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:inputType="text"
+                    android:paddingStart="17dp" />
+            </FrameLayout>
 
             <ImageView
                 android:id="@+id/btnSearch"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@color/black"
+                android:padding="10dp"
+                android:rotation="-17"
+                android:src="@drawable/find"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/crystalBall"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/crystalball"
-            app:layout_constraintBottom_toTopOf="@id/crystalGuide"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alata"
-            android:text="Click to reveal your Future!"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/crystalBall"
-            app:layout_constraintStart_toStartOf="@id/crystalBall"
-            app:layout_constraintTop_toBottomOf="@id/crystalGuide" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
             android:id="@+id/yourCards"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:alpha="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
+            app:layout_constraintVertical_bias="0.65">
 
             <ImageView
                 android:id="@+id/card1"
-
                 android:layout_width="100dp"
                 android:layout_height="142.8dp"
                 android:src="@drawable/card_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/card2"
-                app:layout_constraintStart_toEndOf="@id/cardsGuideLeft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/card2"
                 android:layout_width="100dp"
-                android:layout_margin="20dp"
                 android:layout_height="142.8dp"
+                android:layout_margin="20dp"
                 android:src="@drawable/card_back"
+
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/card3"
-                app:layout_constraintStart_toEndOf="@+id/card1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -100,27 +95,24 @@
                 android:layout_height="142.8dp"
                 android:src="@drawable/card_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/cardsGuideRight"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/card2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/cardsGuideLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.1"
-                />
+                app:layout_constraintGuide_percent="0.1" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/cardsGuideRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.9"
-                />
+                app:layout_constraintGuide_percent="0.9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,6 +136,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/queryGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.06" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

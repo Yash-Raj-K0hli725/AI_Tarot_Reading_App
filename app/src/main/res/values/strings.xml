@@ -6,4 +6,7 @@
     <string name="splashText2">Your Destiny</string>
     <string name="splashText3">Awaits</string>
     <string name="dots">.</string>
+    <string name="meaning_up">meaning_up:</string>
+    <string name="meaning_rev">meaning_Rev:</string>
+    <string name="click_to_reveal_your_future">Click to reveal your Future!</string>
 </resources>

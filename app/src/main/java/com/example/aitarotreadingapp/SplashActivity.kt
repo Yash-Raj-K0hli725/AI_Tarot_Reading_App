@@ -54,6 +54,9 @@ class SplashActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val entryCount = dataBase.getDB().Count()
             if (entryCount == 0 || entryCount < 78) {
+                if(entryCount !=0){
+                    dataBase.getDB().deleteAll()
+                }
                 importData()
             }
             else{

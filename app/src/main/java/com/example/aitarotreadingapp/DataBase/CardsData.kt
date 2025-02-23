@@ -1,8 +1,11 @@
 package com.example.aitarotreadingapp.DataBase
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity
 data class CardsData(
     val desc: String,
@@ -13,5 +16,4 @@ data class CardsData(
     val name_short: String,
     val suit: String?,
     val type: String,
-
-)
+) : Parcelable
