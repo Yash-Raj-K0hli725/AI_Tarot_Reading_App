@@ -16,6 +16,7 @@
         <action
             android:id="@+id/action_home_to_history"
             app:destination="@id/history" />
+
     </fragment>
     <dialog
         android:id="@+id/popUp"
@@ -27,7 +28,7 @@
     </dialog>
     <fragment
         android:id="@+id/history"
-        android:name="com.example.aitarotreadingapp.fragments.History"
+        android:name="com.example.aitarotreadingapp.fragments.History.History"
         android:label="History"
         tools:layout="@layout/fragment_history"
         />

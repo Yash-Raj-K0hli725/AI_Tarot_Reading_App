@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.aitarotreadingapp.MVP.Contract
+import com.example.aitarotreadingapp.MVP.presenter.Presenter
 import com.example.aitarotreadingapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             it.animate().scaleX(1f).setDuration(700L).start()
             it.animate().scaleY(1f).setDuration(700L).start()
             it.animate().translationY(0f).setDuration(700L).start()
+            it.setOnClickListener(null)
             bind.clickText.animate().alpha(0f).setDuration(600L).withEndAction {
                 bind.clickText.visibility = View.GONE
             }.start()
@@ -55,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun setFragment(fragment: Fragment){
-
+    override fun onDestroy() {
+       Presenter().onDettach()
+        super.onDestroy()
     }
 }
