@@ -107,13 +107,8 @@ class SplashActivity : AppCompatActivity() {
     private suspend fun saveToDatabase(cardDetails:List<Card>){
        val mappedCards = cardDetails.map {
             CardsData(
-                desc = it.desc,
-                meaning_rev = it.meaning_rev,
-                meaning_up = it.meaning_up,
                 name = it.name,
                 name_short = it.name_short,
-                suit = it.suit,
-                type = it.type,
             )
         }
             dataBase.getDB().InsertAllTarotDetails(mappedCards)

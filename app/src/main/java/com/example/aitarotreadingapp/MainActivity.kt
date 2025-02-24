@@ -58,8 +58,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onDestroy() {
-       Presenter().onDettach()
-        super.onDestroy()
-    }
 }

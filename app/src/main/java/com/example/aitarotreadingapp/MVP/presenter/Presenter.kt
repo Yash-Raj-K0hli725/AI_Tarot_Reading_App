@@ -28,13 +28,19 @@ class Presenter : Contract.presenter {
     }
 
     override fun onQuestionAsked(context: Context) {
+
         if (view != null) {
             CoroutineScope(Dispatchers.Main).launch {
                 val listofCards = withContext(Dispatchers.IO) {
                     mainModel.fetchDetails()
                 }
                 if (listofCards != null) {
-                    val youGot = giveCards(listofCards)
+                    val temp = giveCards(listofCards)
+                    //get your cards name from here for api calls
+                    val youGot = mutableListOf<String>()
+                    for (i in temp){
+                        youGot.add(i.name_short)
+                    }
                     view!!.youGot(youGot)
                 }
             }
@@ -52,12 +58,8 @@ class Presenter : Contract.presenter {
         return value
     }
 
-    override fun saveQuery(results: List<CardsData>, question: String) {
-        var prevCards = mutableListOf<String>()
-        for (i in results) {
-            prevCards.add(i.name_short)
-        }
-        val prevQuery = PreviousQueries(0, question, prevCards, null)
+    override fun saveQuery(results: List<String>, question: String) {
+        val prevQuery = PreviousQueries(question, results, null)
 
         CoroutineScope(Dispatchers.IO).launch {
             mainModel.insertQueryDetails(prevQuery)
@@ -71,9 +73,15 @@ class Presenter : Contract.presenter {
                 for (i in list) {
                     if (i.question == text) {
                         flag = false
+                        givePrevCards(i)
+                        break
                     }
                 }
             }
         return flag
+    }
+
+    fun givePrevCards(i:PreviousQueries){
+            view!!.youGot(i.prevCards)
     }
 }

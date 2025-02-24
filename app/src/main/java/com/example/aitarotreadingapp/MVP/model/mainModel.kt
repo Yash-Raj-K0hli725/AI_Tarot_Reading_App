@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class mainModel(context: Context):Contract.modelImpl {
     val dataBase = cardsDataBase.getInstance(context).getDB()
+
     override suspend fun fetchDetails(): List<CardsData>? {
         var listofCards:List<CardsData>? = null
         val job = CoroutineScope(Dispatchers.IO).launch {

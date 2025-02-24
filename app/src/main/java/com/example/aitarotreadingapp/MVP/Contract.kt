@@ -22,15 +22,14 @@ interface Contract {
         suspend fun checkAskedQuestion(text:String):Boolean
         fun onQuestionAsked(context: Context)
         fun giveCards(cards: List<CardsData>): List<CardsData>
-        fun saveQuery(results:List<CardsData>,question:String)
+        fun saveQuery(results:List<String>,question:String)
     }
 
     interface view{
-        fun youGot(listofCards:List<CardsData>)
+        fun youGot(listofCards:List<String>)
         fun setCardImages(name_short: String,image: ImageView)
         fun getImageId(name_short: String): Int
-        fun animate(image: ImageView, youGot: CardsData)
-        fun setPopupNavigation(image: ImageView, youGot: CardsData)
+        fun animate(image: ImageView,youGot: String)
         fun animateCardStack()
         fun spreadCards()
         fun shuffleAnimation()

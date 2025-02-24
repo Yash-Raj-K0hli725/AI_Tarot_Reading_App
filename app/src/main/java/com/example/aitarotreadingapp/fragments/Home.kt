@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 class Home : Fragment(), Contract.view {
     lateinit var bind: FragmentHomeBinding
     lateinit var dataBase: cardsDataBase
-    lateinit var listofCards: List<CardsData>
+    lateinit var listofCards: List<String>
     lateinit var presenter: Presenter
     var portal = 0
     override fun onCreateView(
@@ -39,33 +39,40 @@ class Home : Fragment(), Contract.view {
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         dataBase = cardsDataBase.getInstance(requireActivity())
         presenter = Presenter()
-        presenter.getContext(requireContext())
-        presenter.onAttach(this)
-        val query = bind.query.text
 
-        bind.btnSearch.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                if (query.isNotEmpty() && presenter.checkAskedQuestion(query.toString())) {
-                    presenter.onQuestionAsked(requireContext())
-                    bind.yourCards.visibility = View.VISIBLE
-                }
-            }
-        }
-
-        bind.query.setOnClickListener {
-            bind.AnimContainer.animate().alpha(0f).setDuration(700L).start()
-        }
         // Inflate the layout for this fragment
         return bind.root
     }
 
-    override fun youGot(listofCards: List<CardsData>) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.getContext(requireContext())
+        presenter.onAttach(this)
+
+        bind.query.setOnClickListener {
+            bind.AnimContainer.animate().alpha(0f).setDuration(700L).start()
+
+        }
+
+        bind.btnSearch.setOnClickListener {
+            val query = bind.query.text
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (query.isNotEmpty() && presenter.checkAskedQuestion(query.toString())) {
+                    presenter.onQuestionAsked(requireContext())
+                }
+            }
+        }
+
+
+    }
+
+    override fun youGot(listofCards: List<String>) {
         this.listofCards = listofCards
         bind.btnSearch.isEnabled = false
         bind.AnimContainer.animate().alpha(1f).setDuration(700L).start()
         animateCardStack()
         resetAllAnimation()
-
     }
 
     fun resetAllAnimation() {
@@ -85,13 +92,6 @@ class Home : Fragment(), Contract.view {
         bind.yourCards.translationY = 0f
     }
 
-    override fun setPopupNavigation(image: ImageView, youGot: CardsData) {
-        image.setOnClickListener {
-            requireView().findNavController().navigate(HomeDirections.actionHome2ToPopUp(youGot))
-        }
-
-    }
-
     //sets Image to the cards
     override fun setCardImages(name_short: String, image: ImageView) {
         val imageid = getImageId(name_short)
@@ -106,14 +106,6 @@ class Home : Fragment(), Contract.view {
     }
 
     //AllAnimations
-    override fun animate(image: ImageView, youGot: CardsData) {
-        image.animate().setDuration(700L).rotationY(180f).start()
-        Handler(Looper.getMainLooper()).postDelayed({
-            setCardImages(youGot.name_short, image)
-            Floating(image)
-            setPopupNavigation(image, youGot)
-        }, 350)
-    }
 
     override fun animateCardStack() {
         val cardStack = bind.yourCards
@@ -146,6 +138,14 @@ class Home : Fragment(), Contract.view {
                 }
             }.start()
 
+    }
+
+    override fun animate(image: ImageView, youGot: String) {
+        image.animate().setDuration(700L).rotationY(180f).start()
+        Handler(Looper.getMainLooper()).postDelayed({
+            setCardImages(youGot, image)
+            Floating(image)
+        }, 350)
     }
 
     override fun spreadCards() {
@@ -190,13 +190,20 @@ class Home : Fragment(), Contract.view {
             cardPortal.animate().alpha(1f)
                 .setStartDelay(400L).setDuration(500L).start()
             cardPortal.startAnimation(rotate)
+
             val question = bind.query.text.toString()
-
-           presenter.saveQuery(listofCards,question)
-
-        } else {
+            CoroutineScope(Dispatchers.IO).launch {
+                    presenter.saveQuery(listofCards, question)
+            }
+        }
+        else {
             portal++
         }
+
     }
 
+    override fun onDestroyView() {
+        Presenter().onDettach()
+        super.onDestroyView()
+    }
 }

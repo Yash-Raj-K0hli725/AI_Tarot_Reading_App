@@ -11,21 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_home2_to_popUp"
-            app:destination="@id/popUp" />
-        <action
             android:id="@+id/action_home_to_history"
             app:destination="@id/history" />
 
     </fragment>
-    <dialog
-        android:id="@+id/popUp"
-        android:name="com.example.aitarotreadingapp.fragments.popUp"
-        android:label="popUp" >
-        <argument
-            android:name="Card"
-            app:argType="com.example.aitarotreadingapp.DataBase.CardsData" />
-    </dialog>
     <fragment
         android:id="@+id/history"
         android:name="com.example.aitarotreadingapp.fragments.History.History"

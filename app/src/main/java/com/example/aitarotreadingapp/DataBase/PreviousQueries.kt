@@ -7,8 +7,7 @@ import androidx.room.TypeConverters
 
 @Entity
 data class PreviousQueries(
-    @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    @PrimaryKey(autoGenerate = false)
     val question:String,
     val prevCards:List<String>,
     val AiResponse:String?)
