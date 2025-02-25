@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.bouncycastle.bcpg.PacketTags.SECRET_KEY
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -11,6 +13,9 @@ android {
     compileSdk = 35
 
     defaultConfig {
+        buildConfigField (type = "String",
+            name = "SECRET_API_KEY",
+            value = "${project.property("SECRET_API_KEY")}")
         applicationId = "com.example.aitarotreadingapp"
         minSdk = 23
         targetSdk = 34
@@ -39,6 +44,7 @@ android {
     dataBinding{
         enable = true
     }
+    android.buildFeatures.buildConfig = true
 }
 
 dependencies {
@@ -64,6 +70,9 @@ dependencies {
     val lifecycle_version = "2.8.6"
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version")
     //<--
+
+    //Gemini
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

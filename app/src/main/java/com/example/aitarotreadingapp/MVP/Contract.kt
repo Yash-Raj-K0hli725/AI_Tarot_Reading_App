@@ -13,6 +13,7 @@ interface Contract {
         suspend fun insertQueryDetails(prevQuery:PreviousQueries)
         suspend fun readAllQueries():List<PreviousQueries>?
         suspend fun deleteAll()
+        suspend fun generateAiResponse(cards: String,question:String):String
     }
 
     interface presenter {
@@ -22,7 +23,7 @@ interface Contract {
         suspend fun checkAskedQuestion(text:String):Boolean
         fun onQuestionAsked(context: Context)
         fun giveCards(cards: List<CardsData>): List<CardsData>
-        fun saveQuery(results:List<String>,question:String)
+        fun saveQuery(results:List<String>,question:String,AIresponse:String?)
     }
 
     interface view{

@@ -29,6 +29,7 @@ class listAdapter:ListAdapter<PreviousQueries,listAdapter.listVH>(diffUtil()) {
     fun onBind(bind:View,currentItem:PreviousQueries){
         bind.apply {
             findViewById<TextView>(R.id.question).text = currentItem.question
+            findViewById<TextView>(R.id.Airesponse).text = currentItem.AiResponse
             findViewById<ImageView>(R.id.car1).setImageResource(getImageId(currentItem.prevCards[0]))
             findViewById<ImageView>(R.id.car2).setImageResource(getImageId(currentItem.prevCards[1]))
             findViewById<ImageView>(R.id.car3).setImageResource(getImageId(currentItem.prevCards[2]))
@@ -40,11 +41,10 @@ class listAdapter:ListAdapter<PreviousQueries,listAdapter.listVH>(diffUtil()) {
     }
 
      fun getImageId(name_short: String): Int {
-        return context.resources.getIdentifier(name_short, "raw", context.packageName)
+        return context.resources.getIdentifier(name_short, "drawable", context.packageName)
     }
 
     inner class listVH( Item: View):RecyclerView.ViewHolder(Item)
-
 
 }
 

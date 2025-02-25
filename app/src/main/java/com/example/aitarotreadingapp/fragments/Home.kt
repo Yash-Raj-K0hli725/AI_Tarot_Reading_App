@@ -3,23 +3,18 @@ package com.example.aitarotreadingapp.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.example.aitarotreadingapp.DataBase.CardsData
 import com.example.aitarotreadingapp.DataBase.cardsDataBase
 import com.example.aitarotreadingapp.MVP.Contract
 import com.example.aitarotreadingapp.MVP.presenter.Presenter
 import com.example.aitarotreadingapp.R
-import com.example.aitarotreadingapp.TarotApi.Response.Card
 import com.example.aitarotreadingapp.databinding.FragmentHomeBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +27,7 @@ class Home : Fragment(), Contract.view {
     lateinit var listofCards: List<String>
     lateinit var presenter: Presenter
     var portal = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +35,6 @@ class Home : Fragment(), Contract.view {
         bind = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         dataBase = cardsDataBase.getInstance(requireActivity())
         presenter = Presenter()
-
         // Inflate the layout for this fragment
         return bind.root
     }
@@ -51,20 +46,21 @@ class Home : Fragment(), Contract.view {
 
         bind.query.setOnClickListener {
             bind.AnimContainer.animate().alpha(0f).setDuration(700L).start()
+        }
 
+        presenter.AIPrediction.observe(viewLifecycleOwner){
+            bind.prediction.text = it
         }
 
         bind.btnSearch.setOnClickListener {
             val query = bind.query.text
-
             CoroutineScope(Dispatchers.Main).launch {
                 if (query.isNotEmpty() && presenter.checkAskedQuestion(query.toString())) {
+                    presenter.question = query.toString()
                     presenter.onQuestionAsked(requireContext())
                 }
             }
         }
-
-
     }
 
     override fun youGot(listofCards: List<String>) {
@@ -94,15 +90,14 @@ class Home : Fragment(), Contract.view {
 
     //sets Image to the cards
     override fun setCardImages(name_short: String, image: ImageView) {
-        val imageid = getImageId(name_short)
         image.scaleX = -1f
-        image.setImageResource(imageid)
+        image.setImageResource(getImageId(name_short))
     }
 
     //finds id of correct image for outcome
     override fun getImageId(name_short: String): Int {
         val context = requireContext()
-        return context.resources.getIdentifier(name_short, "raw", context.packageName)
+        return context.resources.getIdentifier(name_short, "drawable", context.packageName)
     }
 
     //AllAnimations
@@ -183,20 +178,24 @@ class Home : Fragment(), Contract.view {
     fun rotatePortal() {
 
         if (portal == 2) {
+
+            portal++
+
             val cardPortal = bind.cardPortal
             cardPortal.visibility = View.VISIBLE
             val rotate = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate)
             rotate.interpolator = LinearInterpolator()
+            //Animation start for portal
             cardPortal.animate().alpha(1f)
-                .setStartDelay(400L).setDuration(500L).start()
+                .setStartDelay(400L)
+                .setDuration(500L).start()
             cardPortal.startAnimation(rotate)
-
-            val question = bind.query.text.toString()
-            CoroutineScope(Dispatchers.IO).launch {
-                    presenter.saveQuery(listofCards, question)
-            }
-        }
-        else {
+            //
+            bind.predictionHolder.animate().alpha(1f)
+                .setStartDelay(700L)
+                .setDuration(500L).start()
+            //
+        } else {
             portal++
         }
 

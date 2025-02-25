@@ -38,11 +38,19 @@ class MainActivity : AppCompatActivity() {
 
         bind.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.navHome-> { navHost.popBackStack(R.id.home,false)
+                R.id.navHome-> {
+                    navHost.popBackStack(R.id.home,false)
                 true
                 }
-                R.id.navHistory-> {navHost.navigate(R.id.action_home_to_history)
-                    true }
+                R.id.navHistory-> {
+                    if( navHost.currentDestination!!.id != R.id.history ){
+                        navHost.navigate(R.id.action_home_to_history)
+                        true
+                    }
+                    else{
+                        false
+                    }
+                    }
                 else -> false
             }
 
