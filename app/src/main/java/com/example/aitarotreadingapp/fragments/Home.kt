@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
+import androidx.compose.ui.graphics.Color
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.aitarotreadingapp.DataBase.cardsDataBase
@@ -43,24 +45,59 @@ class Home : Fragment(), Contract.view {
         super.onViewCreated(view, savedInstanceState)
         presenter.getContext(requireContext())
         presenter.onAttach(this)
+        setHintInQuery()
 
         bind.query.setOnClickListener {
             bind.AnimContainer.animate().alpha(0f).setDuration(700L).start()
         }
 
-        presenter.AIPrediction.observe(viewLifecycleOwner){
+        presenter.AIPrediction.observe(viewLifecycleOwner) {
             bind.prediction.text = it
         }
 
         bind.btnSearch.setOnClickListener {
-            val query = bind.query.text
-            CoroutineScope(Dispatchers.Main).launch {
-                if (query.isNotEmpty() && presenter.checkAskedQuestion(query.toString())) {
-                    presenter.question = query.toString()
-                    presenter.onQuestionAsked(requireContext())
-                }
+            doSomthing()
+        }
+
+        bind.query.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                doSomthing()
+                true
+            } else
+                false
+        }
+    }
+
+    private fun doSomthing() {
+        val query = bind.query.text
+        CoroutineScope(Dispatchers.Main).launch {
+            if (query!!.isNotEmpty() && presenter.checkAskedQuestion(query.toString())) {
+                presenter.question = query.toString()
+                presenter.onQuestionAsked(requireContext())
             }
         }
+    }
+
+    private fun setHintInQuery() {
+        val prompts = listOf(
+            "What should I know about my current relationship?",
+            "What energy surrounds my love life right now?",
+            "How can I open myself up to love?",
+            "What lesson do I need to learn today?",
+            "What’s blocking my personal growth?",
+            "What should I focus on in my career right now?",
+            "What opportunities are coming in my career?",
+            "Is this the right time for a job change?",
+            "What message does the universe have for me today?",
+            "What energy is influencing my soul right now?",
+            "What’s the deeper meaning behind my current challenges?",
+            "What do I need to know before making this decision?",
+            "What’s the best path forward for me?",
+            "What should I focus on today?",
+            "What is my partner not telling me?",
+            "What’s the future of this connection?"
+        )
+        bind.query.hint = prompts.random()
     }
 
     override fun youGot(listofCards: List<String>) {

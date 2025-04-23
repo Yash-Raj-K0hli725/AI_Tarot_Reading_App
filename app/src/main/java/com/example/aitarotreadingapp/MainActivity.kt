@@ -1,60 +1,47 @@
 package com.example.aitarotreadingapp
 
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.view.View
-import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.aitarotreadingapp.MVP.Contract
-import com.example.aitarotreadingapp.MVP.presenter.Presenter
+import androidx.navigation.ui.setupWithNavController
 import com.example.aitarotreadingapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    lateinit var bind: ActivityMainBinding
+    private lateinit var bind: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val navHost = findNavController(R.id.hostHolder)
-        bind.main.post {
-            val yMiddle = bind.main.height
-            val ball = bind.crystalBall
-           ball.translationY = -((yMiddle-200)/ 2).toFloat()
+
+        ViewCompat.setOnApplyWindowInsetsListener(bind.bottomNavigation) { v, inset ->
+            val navBar = inset.getInsets(WindowInsetsCompat.Type.navigationBars())
+            bind.main.updatePadding(bottom = navBar.bottom)
+            inset
         }
 
+        val navHost = findNavController(R.id.hostHolder)
         bind.crystalBall.setOnClickListener {
-            it.animate().scaleX(1f).setDuration(700L).start()
-            it.animate().scaleY(1f).setDuration(700L).start()
-            it.animate().translationY(0f).setDuration(700L).start()
+            animateCrystalBall()
             it.setOnClickListener(null)
             bind.clickText.animate().alpha(0f).setDuration(600L).withEndAction {
                 bind.clickText.visibility = View.GONE
             }.start()
+            bind.bgClickText.animate().alpha(0f).setDuration(600L).withEndAction {
+                bind.bgClickText.visibility = View.GONE
+            }.start()
         }
 
-        bind.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.navHome-> {
-                    navHost.popBackStack(R.id.home,false)
-                true
-                }
-                R.id.navHistory-> {
-                    if( navHost.currentDestination!!.id != R.id.history ){
-                        navHost.navigate(R.id.action_home_to_history)
-                        true
-                    }
-                    else{
-                        false
-                    }
-                    }
-                else -> false
-            }
-
-        }
+        bind.bottomNavigation.setupWithNavController(navHost)
 
         //Handling Backpress
         onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true) {
@@ -64,6 +51,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun animateCrystalBall() {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(bind.main)
+        constraintSet.apply {
+            setVerticalBias(bind.crystalBall.id, 0.93f)
+            TransitionManager.beginDelayedTransition(bind.main, ChangeBounds().apply {
+                duration = 400
+            })
+            constraintSet.applyTo(bind.main)
+            bind.crystalBall.animate().scaleX(1f).scaleY(1f).setDuration(400).start()
+        }
+
     }
 
 }

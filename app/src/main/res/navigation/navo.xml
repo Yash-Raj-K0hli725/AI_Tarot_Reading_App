@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navo"
-    app:startDestination="@id/home">
+    app:startDestination="@id/navHome">
 
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/navHome"
         android:name="com.example.aitarotreadingapp.fragments.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_history"
-            app:destination="@id/history" />
+            app:destination="@id/navHistory" />
 
     </fragment>
     <fragment
-        android:id="@+id/history"
+        android:id="@+id/navHistory"
         android:name="com.example.aitarotreadingapp.fragments.History.History"
         android:label="History"
         tools:layout="@layout/fragment_history"

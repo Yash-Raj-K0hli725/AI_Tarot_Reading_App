@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -12,37 +11,37 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/AnimContainer"
-            android:alpha="0"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:alpha="0">
 
-        <ImageView
-            android:alpha="0"
-            android:id="@+id/cardPortal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="-40dp"
-            android:src="@drawable/portal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottomGuide"/>
+            <ImageView
+                android:id="@+id/cardPortal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-40dp"
+                android:alpha="0"
+                android:src="@drawable/portal"
+                app:layout_constraintBottom_toTopOf="@id/bottomGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ScrollView
                 android:id="@+id/predictionHolder"
-                android:alpha="0"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scrollbars="none"
-                android:layout_marginTop="110dp"
-                android:layout_marginBottom="110dp"
-                android:layout_marginEnd="60dp"
                 android:layout_marginStart="60dp"
-                app:layout_constraintTop_toTopOf="@id/cardPortal"
+                android:layout_marginTop="110dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="110dp"
+                android:alpha="0"
+                android:scrollbars="none"
                 app:layout_constraintBottom_toBottomOf="@id/cardPortal"
-                app:layout_constraintStart_toStartOf="@id/cardPortal"
                 app:layout_constraintEnd_toEndOf="@id/cardPortal"
-                >
+                app:layout_constraintStart_toStartOf="@id/cardPortal"
+                app:layout_constraintTop_toTopOf="@id/cardPortal">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,64 +51,63 @@
                         android:id="@+id/prediction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/alata"
                         android:padding="20dp"
                         android:textAlignment="center"
-                        android:fontFamily="@font/alata"
-                        android:textSize="20sp"
                         android:textColor="@color/white"
-                        android:layout_gravity="center"
-                        />
+                        android:textSize="20sp" />
 
                 </FrameLayout>
 
             </ScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
 
-            android:id="@+id/yourCards"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65">
-
-            <ImageView
-                android:id="@+id/card1"
-                android:layout_width="100dp"
-                android:layout_height="142.8dp"
-                android:src="@drawable/card_back"
+                android:id="@+id/yourCards"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65">
 
-            <ImageView
-                android:id="@+id/card2"
-                android:layout_width="100dp"
-                android:layout_height="142.8dp"
-                android:layout_margin="20dp"
-                android:src="@drawable/card_back"
+                <ImageView
+                    android:id="@+id/card1"
+                    android:layout_width="100dp"
+                    android:layout_height="142.8dp"
+                    android:src="@drawable/card_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/card2"
+                    android:layout_width="100dp"
+                    android:layout_height="142.8dp"
+                    android:layout_margin="20dp"
+                    android:src="@drawable/card_back"
 
-            <ImageView
-                android:id="@+id/card3"
-                android:layout_width="100dp"
-                android:layout_height="142.8dp"
-                android:src="@drawable/card_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/card3"
+                    android:layout_width="100dp"
+                    android:layout_height="142.8dp"
+                    android:src="@drawable/card_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/bottomGuide"
@@ -128,28 +126,34 @@
             app:layout_constraintStart_toEndOf="@id/vtextfieldHelperleft"
             app:layout_constraintTop_toBottomOf="@id/queryGuide">
 
-            <FrameLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtLay_query"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxStrokeColor="@color/query"
+                app:cursorColor="@color/primary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnSearch"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/query_outline" />
-
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/query"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/alata"
                     android:inputType="text"
-                    android:paddingStart="17dp" />
-            </FrameLayout>
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
                 android:id="@+id/btnSearch"
@@ -162,6 +166,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
