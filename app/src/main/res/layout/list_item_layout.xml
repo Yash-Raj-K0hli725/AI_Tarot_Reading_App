@@ -5,73 +5,92 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/alata"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
-
             <FrameLayout
                 android:id="@+id/cardFrame"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/question">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0">
 
                 <ImageView
                     android:id="@+id/car1"
                     android:layout_width="50dp"
                     android:layout_height="71.4dp"
-                    android:layout_gravity="start|center_vertical"
-                    android:layout_marginStart="30dp" />
+                    android:layout_margin="5dp"
+                    android:rotation="-10"
+                    android:src="@drawable/ar00" />
 
                 <ImageView
                     android:id="@+id/car2"
                     android:layout_width="50dp"
                     android:layout_height="71.4dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp" />
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:rotation="5"
+                    android:src="@drawable/ar01" />
 
                 <ImageView
                     android:id="@+id/car3"
                     android:layout_width="50dp"
                     android:layout_height="71.4dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="30dp"
-                    />
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:rotation="20"
+                    android:src="@drawable/ar00" />
 
             </FrameLayout>
 
             <TextView
-                android:id="@+id/Airesponse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:id="@+id/question"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:textAllCaps="true"
                 android:fontFamily="@font/alata"
-                android:maxLength="100"
-                android:maxLines="1"
+                android:paddingEnd="10dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@id/Airesponse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cardFrame"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <TextView
+                android:id="@+id/Airesponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/alata"
+                android:padding="5dp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardFrame" />
+                app:layout_constraintTop_toBottomOf="@+id/cardFrame"
+                app:layout_constraintVertical_bias="0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -6,6 +6,7 @@
     </style>
 
     <style name="Theme.AITarotReadingApp" parent="Base.Theme.AITarotReadingApp" />
+
     <style name="customBottomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/secondary</item>
         <item name="android:width">40dp</item>
